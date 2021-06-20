@@ -1,6 +1,6 @@
 <template>
   <div :class="['taskform', {active:  activeForm}]">
-    <input type="text" placeholder="Type your task here">
+    <input type="text" v-model="inputValue" placeholder="Type your task here">
     <div @click="changeTasksList" class="AddTaskButton">ADD</div>
   </div>
 </template>
@@ -15,9 +15,14 @@ export default {
       default: false,
     }
   },
+  data() {
+    return {
+      inputValue: '',
+    }
+  },
   methods: {
     changeTasksList() {
-      eventbus.addTaskToTaskList('new task!')
+      eventbus.addTaskToTaskList(this.inputValue)
     }
   },
 }

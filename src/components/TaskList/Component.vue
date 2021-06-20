@@ -31,6 +31,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  ul {
+    width: 100%;
+    box-sizing: border-box;
+  }
 </style>
