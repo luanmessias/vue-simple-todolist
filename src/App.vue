@@ -5,21 +5,21 @@
 </template>
 
 <script>
-import AppContainer from '@/components/AppContainer/Component.vue'
+import AppContainer from "@/components/AppContainer/Component.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    AppContainer
-  }
-}
+    AppContainer,
+  },
+};
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600&display=swap');
+<style scoped lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600&display=swap");
 
 #app {
-  font-family: 'Oswald', Helvetica, Arial, sans-serif;
+  font-family: "Oswald", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;

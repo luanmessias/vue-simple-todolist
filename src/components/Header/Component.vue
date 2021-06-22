@@ -61,6 +61,8 @@ export default {
   
   .addTask svg {
     transition: all .3s;
+    width: 15px;
+    height: 15px;
   }
 
   .addTask.active {

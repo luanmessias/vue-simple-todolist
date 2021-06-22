@@ -24,6 +24,5 @@ export default {
     height: auto;
     background-color: #FFF;
     border-radius: 15px;
-    height: 300px;
   }
 </style>
