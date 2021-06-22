@@ -1,10 +1,30 @@
 <template>
   <ul>
     <li v-for="task in tasklist" :key="task.index">
-      <div class="taskDesc">{{ task }}</div>
-      <div class="buttons">
-        <div class="svgButton DelSVG"><DelSVG /></div>
-        <div class="svgButton DoneSVG"><DoneSVG /></div>
+      <div :class="['taskItem', { done: task.done }]">
+        <div class="buttons">
+          <div
+            v-if="task.done"
+            class="svgButton DelSVG"
+            @click="toggleTask(task.description)"
+          >
+            <DelSVG />
+          </div>
+          <div
+            v-if="!task.done"
+            class="svgButton DoneSVG"
+            @click="toggleTask(task.description)"
+          >
+            <DoneSVG />
+          </div>
+        </div>
+
+        <div class="taskDesc">
+          {{ task.description }}
+        </div>
+      </div>
+      <div class="deleteTask" @click="deleteTask(task.description)">
+        <BinSVG />
       </div>
     </li>
   </ul>
@@ -13,26 +33,60 @@
 <script>
 import DelSVG from "@/assets/svg/del.svg";
 import DoneSVG from "@/assets/svg/done.svg";
+import BinSVG from "@/assets/svg/bin.svg";
 import eventbus from "@/eventbus";
 
 export default {
   components: {
     DelSVG,
     DoneSVG,
+    BinSVG,
   },
   data() {
     return {
-      tasklist: ["asdasdd", "asdasdasd", "asdasdasd"],
+      tasklist: [],
     };
+  },
+  watch: {
+    tasklist: {
+      deep: true,
+      handler() {
+        eventbus.setTaskList(this.tasklist);
+      },
+    },
+  },
+  methods: {
+    toggleTask(taskName) {
+      const task = this.tasklist.find(
+        ({ description }) => description === taskName
+      );
+      if (task) {
+        task.done = !task.done;
+      }
+    },
+    deleteTask(taskDesk) {
+      const filteredTaskList = this.tasklist.filter(
+        ({ description }) => description !== taskDesk
+      );
+
+      this.tasklist = filteredTaskList;
+    },
   },
   created() {
     eventbus.whenAddNewTask((task) => {
-      const duplicate = this.tasklist.find((txt) => txt === task);
+      const duplicate = this.tasklist.find(
+        ({ description }) => description === task
+      );
+
+      const data = {
+        description: task,
+        done: false,
+      };
 
       if (duplicate) {
         console.log("this task is already registered!");
       } else {
-        this.tasklist.push(task);
+        this.tasklist.push(data);
       }
     });
   },
@@ -49,16 +103,69 @@ ul {
 li {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-wrap: nowrap;
+  width: 100%;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  padding: 5px;
-  border-radius: 5px;
 }
 
 li + li {
   margin-top: 10px;
+}
+
+.taskItem {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-right-width: 0;
+  padding: 5px;
+  transition: all 0.3s;
+  width: auto;
+  height: 40px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+  &.done {
+    background-color: #aaca64;
+  }
+}
+
+.deleteTask {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 25px;
+  background-color: rgb(216, 0, 0);
+  margin-left: auto;
+  height: 40px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  svg {
+    opacity: 0;
+    fill: #fff;
+    max-width: 20px;
+    max-height: 20px;
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    width: 50px;
+    svg {
+      opacity: 1;
+    }
+  }
+}
+
+.taskDesc {
+  margin-left: 15px;
 }
 
 .buttons {
@@ -92,6 +199,14 @@ li + li {
 }
 
 .DelSVG {
+  background-color: #fff;
+
+  svg {
+    path {
+      fill: rgb(105, 105, 105);
+    }
+  }
+
   &:hover {
     background-color: rgb(216, 0, 0);
     border-color: rgb(216, 0, 0);

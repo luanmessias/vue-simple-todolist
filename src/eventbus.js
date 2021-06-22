@@ -7,5 +7,12 @@ export default new Vue({
     whenAddNewTask(callback) {
       this.$on("taskListIsChanged", callback);
     },
+
+    setTaskList(tasklist) {
+      this.$emit("setTaskList", tasklist);
+    },
+    whenSetTaskList(callback) {
+      this.$on("setTaskList", callback);
+    },
   },
 });
