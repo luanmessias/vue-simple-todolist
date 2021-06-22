@@ -1,72 +1,72 @@
 <template>
-  <div :class="['taskform', {active:  activeForm}]">
-    <input type="text" v-model="inputValue" placeholder="Type your task here">
+  <div :class="['taskform', { active: activeForm }]">
+    <input type="text" v-model="inputValue" placeholder="Type your task here" />
     <div @click="changeTasksList" class="AddTaskButton">ADD</div>
   </div>
 </template>
 
 <script>
-import eventbus from '@/eventbus'
+import eventbus from "@/eventbus";
 
 export default {
   props: {
     activeForm: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   data() {
     return {
-      inputValue: '',
-    }
+      inputValue: "",
+    };
   },
   methods: {
     changeTasksList() {
-      eventbus.addTaskToTaskList(this.inputValue)
-    }
+      eventbus.addTaskToTaskList(this.inputValue);
+    },
   },
-}
+};
 </script>
 
-<style scoped>
-  .taskform {
-    display: flex;
-    justify-content: space-between;
-    overflow: hidden;
-    box-sizing: border-box;
-    width: 100%;
-    background-color: rgb(243, 243, 243);
-    height: 0px;
-    opacity: 0;
-    transition: all .3s;
-  }
+<style scoped lang="scss">
+.taskform {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgb(243, 243, 243);
+  height: 0px;
+  opacity: 0;
+  transition: all 0.3s;
 
-  .taskform.active {
+  &.active {
     height: 35px;
     opacity: 1;
   }
+}
 
-  input {
-    border: none;
-    background-color: transparent;
-    box-sizing: border-box;
-    padding: 10px;
-  }
+input {
+  border: none;
+  background-color: transparent;
+  box-sizing: border-box;
+  padding: 10px;
+}
 
-  .AddTaskButton {
-    box-sizing: border-box;
-    height: 100%;
-    background-color: #999999;
-    padding: 0px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: #FFF;
-    transition: all .3s;
-  }
+.AddTaskButton {
+  box-sizing: border-box;
+  height: 100%;
+  background-color: #999999;
+  padding: 0px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s;
 
-  .AddTaskButton:hover {
+  &:hover {
     background-color: #666666;
   }
+}
 </style>
