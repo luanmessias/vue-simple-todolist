@@ -1,6 +1,11 @@
 <template>
   <div :class="['taskform', { active: activeForm }]">
-    <input type="text" v-model="inputValue" placeholder="Type your task here" />
+    <input
+      type="text"
+      v-model="inputValue"
+      placeholder="Type your task here"
+      @keyup.enter="changeTasksList"
+    />
     <div @click="changeTasksList" class="AddTaskButton">ADD</div>
   </div>
 </template>
