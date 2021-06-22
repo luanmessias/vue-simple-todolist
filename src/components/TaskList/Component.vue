@@ -84,9 +84,16 @@ export default {
       };
 
       if (duplicate) {
-        console.log("this task is already registered!");
+        eventbus.callToastMsg({
+          type: "error",
+          msg: "this task is already registered!",
+        });
       } else {
         this.tasklist.push(data);
+        eventbus.callToastMsg({
+          type: "success",
+          msg: "task added successfully!",
+        });
       }
     });
   },

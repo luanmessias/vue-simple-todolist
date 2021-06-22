@@ -1,16 +1,19 @@
 <template>
   <div id="app">
+    <ToastNotification />
     <AppContainer />
   </div>
 </template>
 
 <script>
 import AppContainer from "@/components/AppContainer/Component.vue";
+import ToastNotification from "@/components/ToastNotification/Component.vue";
 
 export default {
   name: "App",
   components: {
     AppContainer,
+    ToastNotification,
   },
 };
 </script>

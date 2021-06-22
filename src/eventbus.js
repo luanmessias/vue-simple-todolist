@@ -14,5 +14,12 @@ export default new Vue({
     whenSetTaskList(callback) {
       this.$on("setTaskList", callback);
     },
+
+    callToastMsg(msg) {
+      this.$emit("callToastMsg", msg);
+    },
+    whenToastMsgIsCalled(callback) {
+      this.$on("callToastMsg", callback);
+    },
   },
 });

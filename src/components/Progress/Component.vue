@@ -1,7 +1,11 @@
 <template>
   <div class="progress">
     <div class="progress__card">
-      <vue-ellipse-progress :progress="percentDone" :size="60" />
+      <vue-ellipse-progress
+        :progress="percentDone"
+        :size="60"
+        color="#89c30d"
+      />
       <div class="progress__info">
         <strong>Your Progress</strong>
         <span>{{ tasksDone }} /{{ totalTasks }} tasks done</span>

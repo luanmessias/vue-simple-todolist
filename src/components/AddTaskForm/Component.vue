@@ -25,6 +25,7 @@ export default {
   methods: {
     changeTasksList() {
       eventbus.addTaskToTaskList(this.inputValue);
+      this.inputValue = "";
     },
   },
 };
