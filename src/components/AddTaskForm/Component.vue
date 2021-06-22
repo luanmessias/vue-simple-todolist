@@ -1,9 +1,7 @@
 <template>
   <div :class="['taskform', { active: activeForm }]">
     <input type="text" v-model="inputValue" placeholder="Type your task here" />
-    <div v-if="inputValue" @click="changeTasksList" class="AddTaskButton">
-      ADD
-    </div>
+    <div @click="changeTasksList" class="AddTaskButton">ADD</div>
   </div>
 </template>
 

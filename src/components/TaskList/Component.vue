@@ -78,6 +78,8 @@ export default {
         ({ description }) => description === task
       );
 
+      const empty = task === "";
+
       const data = {
         description: task,
         done: false,
@@ -87,6 +89,11 @@ export default {
         eventbus.callToastMsg({
           type: "error",
           msg: "this task is already registered!",
+        });
+      } else if (empty) {
+        eventbus.callToastMsg({
+          type: "error",
+          msg: "task description is empty",
         });
       } else {
         this.tasklist.push(data);
