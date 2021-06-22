@@ -144,7 +144,7 @@ li + li {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 10px;
+  width: 40px;
   height: 25px;
   background-color: rgb(216, 0, 0);
   margin-left: auto;
@@ -152,22 +152,12 @@ li + li {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   overflow: hidden;
-  transition: all 0.3s;
   cursor: pointer;
 
   svg {
-    opacity: 0;
     fill: #fff;
     max-width: 20px;
     max-height: 20px;
-    transition: all 0.3s;
-  }
-
-  &:hover {
-    width: 50px;
-    svg {
-      opacity: 1;
-    }
   }
 }
 
