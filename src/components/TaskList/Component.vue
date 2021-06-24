@@ -52,6 +52,7 @@ export default {
       deep: true,
       handler() {
         eventbus.setTaskList(this.tasklist);
+        localStorage.setItem("tasklist", JSON.stringify(this.tasklist));
       },
     },
   },
@@ -73,6 +74,10 @@ export default {
     },
   },
   created() {
+    const json = localStorage.getItem("tasklist");
+    const array = JSON.parse(json);
+    this.tasklist = Array.isArray(array) ? array : [];
+
     eventbus.whenAddNewTask((task) => {
       const duplicate = this.tasklist.find(
         ({ description }) => description === task
